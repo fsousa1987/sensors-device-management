@@ -1,4 +1,4 @@
-package com.francisco.sensors.device.management;
+package com.francisco.sensors.device.management.common;
 
 import io.hypersistence.tsid.TSID;
 
