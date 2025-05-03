@@ -36,4 +36,18 @@ public class SensorId implements Serializable {
 		return value.toString();
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		SensorId sensorId = (SensorId) o;
+		return value.equals(sensorId.value);
+	}
+
+	@Override
+	public int hashCode() {
+		return value.hashCode();
+	}
+
 }
