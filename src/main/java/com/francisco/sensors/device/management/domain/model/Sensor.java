@@ -25,7 +25,7 @@ public class Sensor {
 	private String location;
 	private String protocol;
 	private String model;
-	private boolean enabled;
+	private Boolean enabled;
 
 }
 

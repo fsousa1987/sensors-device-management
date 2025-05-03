@@ -1,6 +1,7 @@
 package com.francisco.sensors.device.management.api.controller;
 
 import com.francisco.sensors.device.management.api.model.SensorInput;
+import com.francisco.sensors.device.management.api.model.SensorOutput;
 import com.francisco.sensors.device.management.common.IdGenerator;
 import com.francisco.sensors.device.management.domain.model.Sensor;
 import com.francisco.sensors.device.management.domain.model.SensorId;
@@ -18,7 +19,7 @@ public class SensorController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Sensor create(@RequestBody SensorInput input) {
+	public SensorOutput create(@RequestBody SensorInput input) {
 		Sensor sensor = Sensor
 				.builder()
 				.id(new SensorId(IdGenerator.generateTSID()))
@@ -29,7 +30,17 @@ public class SensorController {
 				.model(input.getModel())
 				.enabled(false).build();
 
-		return sensorRepository.saveAndFlush(sensor);
+		sensor = sensorRepository.saveAndFlush(sensor);
+		return SensorOutput
+				.builder()
+				.id(sensor.getId().getValue())
+				.name(sensor.getName())
+				.ip(sensor.getIp())
+				.location(sensor.getLocation())
+				.protocol(sensor.getProtocol())
+				.model(sensor.getModel())
+				.enabled(sensor.getEnabled())
+				.build();
 	}
 
 }
